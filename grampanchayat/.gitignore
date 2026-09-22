@@ -1,0 +1,43 @@
+# Node / npm
+node_modules/
+.npm/
+.pnpm-store/
+
+# Build outputs
+build/
+dist/
+out/
+.next/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Supabase local dev
+.supabase/
+
+# Misc
+*.local
+
+# React / frontend caches
+.cache/
+.parcel-cache/

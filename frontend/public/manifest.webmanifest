@@ -1,0 +1,24 @@
+{
+  "name": "Bramhangaon Vanas Panchayat",
+  "short_name": "GP Bramhangaon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 72x72 96x96 128x128 256x256",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

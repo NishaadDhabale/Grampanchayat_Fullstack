@@ -1,0 +1,251 @@
+/* Gallery Component Styles */
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay {
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.8s ease-out 0.4s forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Shimmer Loading Effect */
+.shimmer-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gallery Item Styles */
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden; /* ✅ keeps image inside the box */
+  border-radius: 0.75rem; /* ✅ rounded corners */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Gallery Image Transitions */
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.25s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Desktop Hover Effects */
+@media (min-width: 768px) {
+  .gallery-item {
+    transform-origin: center center;
+  }
+
+  .gallery-item:hover {
+    z-index: 100;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.12),
+      0 12px 12px -8px rgba(0, 0, 0, 0.06);
+    transform: scale(1.2);
+  }
+
+  .gallery-item:hover .gallery-image {
+    transform: none; /* container handles zoom */
+    filter: brightness(1.06) contrast(1.04);
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+  }
+}
+
+/* Mobile Touch Effects */
+@media (max-width: 767px) {
+  .gallery-item:active {
+    z-index: 60;
+  }
+
+  .gallery-item:active .gallery-image {
+    transform: scale(1.04); /* ✅ subtle zoom only on the image */
+    filter: brightness(1.03) contrast(1.02);
+  }
+
+  .gallery-item:active .gallery-overlay {
+    opacity: 1;
+  }
+}
+
+/* Gallery Overlay */
+.gallery-overlay {
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+/* Fullscreen Modal Styles */
+.gallery-modal {
+  backdrop-filter: blur(4px);
+}
+
+.gallery-modal img {
+  transition: transform 0.3s ease-out;
+}
+
+.gallery-modal img:hover {
+  transform: scale(1.02);
+}
+
+/* Grid Layout Enhancements */
+.gallery-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* Loading States */
+.gallery-item.loading {
+  background: #f8f9fa;
+}
+
+.gallery-item.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #e9ecef;
+  border-top-color: #6c757d;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error States */
+.gallery-item.error {
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Accessibility Improvements */
+.gallery-item:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.gallery-item:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .gallery-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      transparent 100%
+    );
+  }
+
+  .gallery-item {
+    border: 2px solid #000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item,
+  .gallery-image,
+  .gallery-overlay,
+  .animate-fade-in-up,
+  .animate-fade-in-scale,
+  .animate-fade-in {
+    animation: none;
+    transition: none;
+  }
+
+  .gallery-item {
+    opacity: 1;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .gallery-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .gallery-overlay {
+    display: none;
+  }
+}
